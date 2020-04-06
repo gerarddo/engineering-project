@@ -6,9 +6,13 @@ class Explorer:
         self.periods = periods
         self.index = index
         
-    def data(self,key):
+    def data(self,key,normalize=False):
         idx = self.getIndex(key)
-        return self.split[idx], self.intervals[idx], self.periods[idx], self.title(key)
+        data = self.split[idx]
+        if normalize:
+            maxAmp = max(data.min(), data.max(), key=abs)
+            data = data*(1/maxAmp)
+        return data, self.intervals[idx], self.periods[idx], self.title(key)
     
     def title(self,key):
         idx = self.getIndex(key)
