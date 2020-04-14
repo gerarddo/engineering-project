@@ -64,19 +64,10 @@ class Display:
         
         if fmax > 0:
             reachIndex = len(xData[xData <= fmax])
-#             plt.text(
-#                 xData[reachIndex]*0.84, 
-#                 300, 
-#                 'Max frequency shown: ' + str(np.round(xData[reachIndex], decimals=2)) + ' [Hz]'
-#             )
         
         if fmin > 0:
             startIndex = len(xData[xData <= fmin])
-#             plt.text(
-#                 xData[reachIndex]*0.84, 
-#                 400, 
-#                 'Min frequency shown: ' + str(np.round(xData[startIndex], decimals=2)) + ' [Hz]'
-#             )
+
 
         # calculate shift 
         if fmin > 0:
@@ -87,7 +78,7 @@ class Display:
         
         if normalize:
             print('normalizing')
-            norm1 = yData / np.linalg.norm(yData)
+            norm1 = yData / yData.max()
             yData = norm1
 #             yData = yData/yData.max()
             
@@ -97,9 +88,9 @@ class Display:
         plt.xticks(np.arange(fmin, xData[reachIndex], step=step))
         plt.title(title)
         
-#         if maxAmp > 0:
-#             print('maxamp higher than zero alright')
-#             plt.ylim((0, maxAmp)) 
+        if maxAmp > 0:
+            print('maxamp higher than zero alright')
+            plt.ylim((0, maxAmp)) 
         
     def spectra(self,complexSpectra,Fs,title,step=1000,fmin=0, fmax=0, figsize=(18, 4),maxAmp=0,
         normalize = False):
@@ -117,7 +108,7 @@ class Display:
         print('Duration: ' + str(len(x)/sr) + ' (seconds)')
 
 #         plt.
-(
+# (
 #             20, 
 #             200, 
 #             'Sample bits: ' + str(len(x)) + ' (bits)'
@@ -142,5 +133,5 @@ class Display:
 # ax.text(0.05, 0.95, textstr, transform=ax.transAxes, fontsize=14,
 #         verticalalignment='top', bbox=props)
     
-        
-# disp = Display()
+#         
+disp = Display()
